@@ -1,5 +1,6 @@
 import type { SVGProps } from "react";
 
+// The GaneshaIcon is no longer used, but kept here for potential future use.
 export function GaneshaIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

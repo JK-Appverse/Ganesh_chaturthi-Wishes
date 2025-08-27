@@ -8,7 +8,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
-import { GaneshaIcon } from '@/components/icons';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -67,7 +66,7 @@ function WishesContent() {
         <Card className="w-full max-w-lg shadow-2xl z-10 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 animate-background-pan [background-size:200%_200%] border-primary/40">
         <CardContent className="p-4 md:p-6 text-center">
           <div className="flex justify-center mb-4 text-white">
-            <GaneshaIcon className="h-24 w-24 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
+            <span className="text-7xl animate-pulse drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">🙏</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
             <span className="font-headline text-5xl md:text-6xl text-yellow-200">{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
