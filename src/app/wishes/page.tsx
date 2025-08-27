@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
+import AdBanner from '@/components/AdBanner';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -83,7 +84,11 @@ function WishesContent() {
   };
 
   if (!isClient) {
-    return null; // or a loading skeleton
+    return (
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
   }
   
   return (
@@ -114,8 +119,12 @@ function WishesContent() {
           </p>
         </CardContent>
       </Card>
+      
+      <div className="my-4 z-10">
+        <AdBanner />
+      </div>
 
-      <div className="mt-6 flex flex-col gap-4 z-10 w-full max-w-lg">
+      <div className="flex flex-col gap-4 z-10 w-full max-w-lg">
           <Button onClick={handleShare} className="w-full text-lg py-6 bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105">
             <Share2 className="mr-2" /> शेयर करें
           </Button>
