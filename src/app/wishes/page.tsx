@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
+import Script from 'next/script';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -103,6 +104,22 @@ function WishesContent() {
           </p>
         </CardContent>
       </Card>
+
+      <div className="my-4">
+        <Script id="banner-ad-2" strategy="lazyOnload">
+          {`
+            atOptions = {
+              'key' : '7dbc62c8ffa684dad3b4c20f4bb0654d',
+              'format' : 'iframe',
+              'height' : 50,
+              'width' : 320,
+              'params' : {}
+            };
+          `}
+        </Script>
+        <Script src="//www.highperformanceformat.com/7dbc62c8ffa684dad3b4c20f4bb0654d/invoke.js" strategy="lazyOnload"></Script>
+      </div>
+
 
       <div className="mt-6 flex flex-col gap-4 z-10 w-full max-w-lg">
           <Button onClick={handleShare} className="w-full text-lg py-6 bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105">
