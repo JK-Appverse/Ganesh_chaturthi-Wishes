@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Heart, Loader2, Share2, Home, UserPlus } from 'lucide-react';
+import { Heart, Loader2, Share2, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +16,8 @@ function WishesContent() {
   const name = searchParams.get('name') || 'Friend';
   const { toast } = useToast();
 
-  const [wishData, setWishData] = useState<GenerateGaneshWishOutput | null>(null);
+  const [wishData, setWishData] = useState<{quote: string, audioDataUri: string} | null>(null);
+  const [quote, setQuote] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function WishesContent() {
       try {
         const result = await generateGaneshWish({ userName: name });
         setWishData(result);
+        setQuote(result.quote);
       } catch (error) {
         console.error(error);
         toast({
@@ -38,6 +40,14 @@ function WishesContent() {
     }
     getWish();
   }, [name, toast]);
+
+  useEffect(() => {
+    // This useEffect will only run on the client, after the first render.
+    // This avoids hydration mismatch for the randomly selected quote.
+    if (wishData) {
+      setQuote(wishData.quote);
+    }
+  }, [wishData]);
 
   const handleShare = () => {
     if (navigator.share) {
@@ -69,7 +79,7 @@ function WishesContent() {
         <CardContent className="p-4 md:p-6 text-center">
           <div className="mb-4">
             <Image
-              src="/ganesha.jpg"
+              src="https://picsum.photos/400/400"
               alt="Lord Ganesha"
               width={400}
               height={400}
@@ -83,14 +93,14 @@ function WishesContent() {
           </h1>
 
           <div className="mt-6 text-orange-200/90 italic text-lg min-h-[6rem] flex items-center justify-center">
-            {isLoading ? (
+            {isLoading || !quote ? (
               <div className="space-y-2 w-full">
                 <Skeleton className="h-4 w-5/6 mx-auto bg-white/20" />
                 <Skeleton className="h-4 w-4/6 mx-auto bg-white/20" />
                 <Skeleton className="h-4 w-5/6 mx-auto bg-white/20" />
               </div>
             ) : (
-                <p>"{wishData?.quote}"</p>
+                <p>"{quote}"</p>
             )}
           </div>
         </CardContent>
