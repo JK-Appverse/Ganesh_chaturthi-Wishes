@@ -4,15 +4,11 @@ import { useEffect, useRef } from 'react';
 
 const AdBanner = () => {
   const adContainerRef = useRef<HTMLDivElement | null>(null);
-  const adLoadedRef = useRef(false);
 
   useEffect(() => {
-    if (adContainerRef.current && !adLoadedRef.current) {
-      adContainerRef.current.innerHTML = '';
-      
+    if (adContainerRef.current && adContainerRef.current.children.length === 0) {
       const script = document.createElement('script');
       script.type = 'text/javascript';
-      
       script.innerHTML = `
         atOptions = {
           'key' : '7dbc62c8ffa684dad3b4c20f4bb0654d',
@@ -22,16 +18,12 @@ const AdBanner = () => {
           'params' : {}
         };
       `;
-      
       adContainerRef.current.appendChild(script);
 
       const invokeScript = document.createElement('script');
       invokeScript.type = 'text/javascript';
       invokeScript.src = '//www.highperformanceformat.com/7dbc62c8ffa684dad3b4c20f4bb0654d/invoke.js';
-      
       adContainerRef.current.appendChild(invokeScript);
-
-      adLoadedRef.current = true;
     }
   }, []);
 
