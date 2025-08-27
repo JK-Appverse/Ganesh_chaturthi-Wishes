@@ -10,6 +10,10 @@ import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
+
+const AdBanner = dynamic(() => import('@/components/AdBanner').then(mod => mod.AdBanner), { ssr: false });
+
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -106,18 +110,7 @@ function WishesContent() {
       </Card>
 
       <div className="my-4">
-        <Script id="banner-ad-2" strategy="lazyOnload">
-          {`
-            atOptions = {
-              'key' : '7dbc62c8ffa684dad3b4c20f4bb0654d',
-              'format' : 'iframe',
-              'height' : 50,
-              'width' : 320,
-              'params' : {}
-            };
-          `}
-        </Script>
-        <Script src="//www.highperformanceformat.com/7dbc62c8ffa684dad3b4c20f4bb0654d/invoke.js" strategy="lazyOnload"></Script>
+        <AdBanner />
       </div>
 
 
