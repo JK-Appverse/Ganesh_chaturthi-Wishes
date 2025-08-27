@@ -9,18 +9,22 @@ const AdBanner = () => {
   useEffect(() => {
     // Ensure this runs only once and only on the client
     if (adContainerRef.current && !adLoadedRef.current) {
+      // Clear any previous content
+      adContainerRef.current.innerHTML = '';
+      
       const script = document.createElement('script');
       script.type = 'text/javascript';
       
       // Inline script part
-      const atOptions = {
-        'key' : '7dbc62c8ffa684dad3b4c20f4bb0654d',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
-      script.innerHTML = `atOptions = ${JSON.stringify(atOptions)};`;
+      script.innerHTML = `
+        atOptions = {
+          'key' : '7dbc62c8ffa684dad3b4c20f4bb0654d',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      `;
       
       adContainerRef.current.appendChild(script);
 
