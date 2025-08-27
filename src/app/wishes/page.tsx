@@ -2,13 +2,13 @@
 
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { Heart, Loader2, Share2, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
+import { GaneshaIcon } from '@/components/icons';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -18,8 +18,6 @@ function WishesContent() {
 
   const [quote, setQuote] = useState<string | null>(null);
   const [isQuoteLoading, setIsQuoteLoading] = useState(true);
-  const [isImageLoading, setIsImageLoading] = useState(true);
-  const imageUrl = '/ganesha.png'; // Using the image from the public folder
 
   useEffect(() => {
     async function getWish() {
@@ -68,17 +66,8 @@ function WishesContent() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/traditional-mandala.png')] opacity-10"></div>
         <Card className="w-full max-w-lg shadow-2xl z-10 bg-black/30 backdrop-blur-md border-primary/40 animate-fade-in">
         <CardContent className="p-4 md:p-6 text-center">
-          <div className="mb-4">
-             <Image
-              src={imageUrl}
-              alt="Lord Ganesha"
-              width={800}
-              height={1000}
-              className={`rounded-lg mx-auto shadow-lg border-2 border-amber-400/50 transition-opacity duration-500 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
-              onLoad={() => setIsImageLoading(false)}
-              priority
-            />
-             {isImageLoading && <Skeleton className="w-full h-[500px] rounded-lg bg-white/20" />}
+          <div className="flex justify-center mb-4 text-primary">
+            <GaneshaIcon className="h-24 w-24" />
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] font-noto-serif-devanagari">
             {name} की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
