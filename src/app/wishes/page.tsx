@@ -70,7 +70,7 @@ function WishesContent() {
             <GaneshaIcon className="h-24 w-24 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
-            <span className="font-tangerine text-5xl md:text-6xl text-yellow-200">{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
+            <span className="font-headline text-5xl md:text-6xl text-yellow-200">{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
           </h1>
 
           <div className="mt-6 text-white/90 italic text-lg min-h-[6rem] flex items-center justify-center font-noto-serif-devanagari">
