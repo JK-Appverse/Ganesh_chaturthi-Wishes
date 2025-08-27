@@ -9,10 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
-import dynamic from 'next/dynamic';
-
-const AdBanner = dynamic(() => import('@/components/AdBanner').then(mod => mod.AdBanner), { ssr: false });
-
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -107,11 +103,6 @@ function WishesContent() {
           </p>
         </CardContent>
       </Card>
-
-      <div className="my-4">
-        <AdBanner />
-      </div>
-
 
       <div className="mt-6 flex flex-col gap-4 z-10 w-full max-w-lg">
           <Button onClick={handleShare} className="w-full text-lg py-6 bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105">
