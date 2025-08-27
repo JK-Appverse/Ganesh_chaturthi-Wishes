@@ -30,20 +30,19 @@ export default function RootLayout({
       <body className={cn("font-body antialiased", notoSerifDevanagari.variable)}>
         {children}
         <Toaster />
-        <Script
-            id="native-banner-ad"
-            strategy="lazyOnload"
-        >{`
-          (function(w, d, o, s, id) {
+        <Script id="native-banner-ad" strategy="afterInteractive">
+          {`
+            (function(w, d, o, s, id) {
               if (d.getElementById(id)) return;
               var js = d.createElement(s);
               js.id = id;
               js.src = o;
               js.async = true;
               js.setAttribute('data-cfasync', 'false');
-              d.getElementsByTagName('head')[0].appendChild(js);
-          })(window, document, '//pl27517644.profitableratecpm.com/fa891ecb3a8f703fb88dc290542b4046/invoke.js', 'script', 'container-fa891ecb3a8f703fb88dc290542b4046-invoker');
-        `}</Script>
+              d.getElementsByTagName('body')[0].appendChild(js);
+            })(window, document, '//pl27517644.profitableratecpm.com/fa891ecb3a8f703fb88dc290542b4046/invoke.js', 'script', 'container-fa891ecb3a8f703fb88dc290542b4046');
+          `}
+        </Script>
       </body>
     </html>
   );
