@@ -139,9 +139,9 @@ function WishesContent() {
                 <Send className="mr-2 h-4 w-4" /> बनाएं
               </Button>
             </form>
-          </div>
-          <div className="z-10 mt-4 w-full max-w-lg">
-            <div id="container-fa891ecb3a8f703fb88dc290542b4046"></div>
+            <div className="z-10 mt-4 w-full max-w-lg">
+              <div id="container-fa891ecb3a8f703fb88dc290542b4046"></div>
+            </div>
           </div>
       </div>
       <footer className="text-center mt-8 text-sm text-white/60 z-10">
