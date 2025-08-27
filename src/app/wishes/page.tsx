@@ -9,7 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
-import Script from 'next/script';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -85,7 +84,7 @@ function WishesContent() {
             <span className="text-7xl animate-pulse drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">🙏</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
-            <span className="font-headline text-5xl md:text-6xl text-yellow-200 font-noto-serif-devanagari" style={{fontFamily: "'Alegreya', serif"}}>{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
+            <span className="font-headline text-5xl md:text-6xl text-yellow-200" style={{fontFamily: "'Alegreya', serif"}}>{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
           </h1>
 
           <div className="mt-6 text-white/90 italic text-lg min-h-[6rem] flex items-center justify-center font-noto-serif-devanagari">
@@ -130,12 +129,6 @@ function WishesContent() {
       </footer>
       <div className="z-10 mt-8 w-full max-w-lg">
         <div id="container-fa891ecb3a8f703fb88dc290542b4046"></div>
-        <Script
-            async={true}
-            data-cfasync="false"
-            src="//pl27517644.profitableratecpm.com/fa891ecb3a8f703fb88dc290542b4046/invoke.js"
-            strategy="afterInteractive"
-        />
       </div>
     </main>
   );
