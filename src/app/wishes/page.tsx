@@ -2,12 +2,13 @@
 
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Heart, Loader2, Share2, UserPlus } from 'lucide-react';
+import { Heart, Loader2, Share2, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -17,6 +18,7 @@ function WishesContent() {
 
   const [quote, setQuote] = useState<string | null>(null);
   const [isQuoteLoading, setIsQuoteLoading] = useState(true);
+  const [newName, setNewName] = useState('');
 
   useEffect(() => {
     async function getWish() {
@@ -59,6 +61,19 @@ function WishesContent() {
       });
     }
   };
+
+  const handleCreateNewWish = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newName.trim().length < 2) {
+      toast({
+        variant: "destructive",
+        title: "नाम बहुत छोटा है",
+        description: "कृपया कम से कम 2 अक्षरों का नाम दर्ज करें।",
+      });
+      return;
+    }
+    router.push(`/wishes?name=${encodeURIComponent(newName)}`);
+  };
   
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-yellow-900 via-orange-900 to-red-900 p-4 font-body sm:p-6 md:p-8 text-white relative overflow-hidden">
@@ -69,7 +84,7 @@ function WishesContent() {
             <span className="text-7xl animate-pulse drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">🙏</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
-            <span className="font-headline text-5xl md:text-6xl text-yellow-200">{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
+            <span className="font-headline text-5xl md:text-6xl text-yellow-200 font-noto-serif-devanagari">{name}</span> की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
           </h1>
 
           <div className="mt-6 text-white/90 italic text-lg min-h-[6rem] flex items-center justify-center font-noto-serif-devanagari">
@@ -89,13 +104,25 @@ function WishesContent() {
         </CardContent>
       </Card>
 
-      <div className="mt-6 flex flex-col sm:flex-row gap-4 z-10 w-full max-w-lg">
+      <div className="mt-6 flex flex-col gap-4 z-10 w-full max-w-lg">
           <Button onClick={handleShare} className="w-full text-lg py-6 bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105">
             <Share2 className="mr-2" /> प्यार से साझा करें
           </Button>
-          <Button onClick={() => router.push('/')} variant="outline" className="w-full text-lg py-6 bg-white/20 border-white/50 text-white hover:bg-white/30 transition-all duration-300 transform hover:scale-105">
-             <UserPlus className="mr-2" /> नई शुभकामना बनाएं
-          </Button>
+          
+          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg space-y-3">
+             <form onSubmit={handleCreateNewWish} className="flex flex-col sm:flex-row gap-3">
+              <Input
+                type="text"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                placeholder="किसी और का नाम लिखें"
+                className="bg-background/80 text-white placeholder:text-gray-300 border-white/50 flex-grow"
+              />
+              <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                <Send className="mr-2 h-4 w-4" /> बनाएं
+              </Button>
+            </form>
+          </div>
       </div>
       <footer className="text-center mt-8 text-sm text-white/60 z-10">
         <p>आपके लिए <Heart className="inline h-4 w-4 text-red-400 animate-pulse" /> से बनाया गया है।</p>
