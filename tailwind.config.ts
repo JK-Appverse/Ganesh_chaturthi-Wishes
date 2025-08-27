@@ -13,6 +13,8 @@ export default {
         body: ['Alegreya', 'serif'],
         headline: ['Alegreya', 'serif'],
         code: ['monospace'],
+        tangerine: ['Tangerine', 'cursive'],
+        'noto-serif-devanagari': ['var(--font-noto-serif-devanagari)', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
