@@ -83,6 +83,9 @@ function WishesContent() {
                 <p>"{quote}"</p>
             )}
           </div>
+          <p className="mt-4 text-sm text-white/80 animate-pulse">
+            इस शुभकामना को कम से कम दो और लोगों के साथ साझा करें और खुशियाँ फैलाएँ।
+          </p>
         </CardContent>
       </Card>
 
