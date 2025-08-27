@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
 import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
-import { generateGaneshWishesImage } from '@/ai/flows/generate-ganesh-wishes-image';
 import { Skeleton } from '@/components/ui/skeleton';
 
 function WishesContent() {
@@ -18,26 +17,18 @@ function WishesContent() {
   const { toast } = useToast();
 
   const [quote, setQuote] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isImageLoading, setIsImageLoading] = useState(true);
   const [isQuoteLoading, setIsQuoteLoading] = useState(true);
+  const imageUrl = '/ganesha.png'; // Using the image from the public folder
 
   useEffect(() => {
     async function getWish() {
       if (!name) return;
       
       setIsQuoteLoading(true);
-      setIsImageLoading(true);
 
       try {
-        const quotePromise = generateGaneshWish({ userName: name });
-        const imagePromise = generateGaneshWishesImage({ userName: name });
-
-        const [quoteResult, imageResult] = await Promise.all([quotePromise, imagePromise]);
-        
+        const quoteResult = await generateGaneshWish({ userName: name });
         setQuote(quoteResult.quote);
-        setImageUrl(imageResult.imageDataUri);
-
       } catch (error) {
         console.error(error);
         toast({
@@ -47,7 +38,6 @@ function WishesContent() {
         });
       } finally {
         setIsQuoteLoading(false);
-        setIsImageLoading(false);
       }
     }
     
@@ -78,18 +68,14 @@ function WishesContent() {
         <Card className="w-full max-w-lg shadow-2xl z-10 bg-black/30 backdrop-blur-md border-primary/40 animate-fade-in">
         <CardContent className="p-4 md:p-6 text-center">
           <div className="mb-4">
-            {isImageLoading || !imageUrl ? (
-              <Skeleton className="w-full h-[400px] rounded-lg bg-white/20" />
-            ) : (
-               <Image
-                src={imageUrl}
-                alt="Lord Ganesha"
-                width={800}
-                height={1000}
-                className={`rounded-lg mx-auto shadow-lg border-2 border-amber-400/50 ${isImageLoading ? 'hidden' : 'block'}`}
-                onLoad={() => setIsImageLoading(false)}
-              />
-            )}
+             <Image
+              src={imageUrl}
+              alt="Lord Ganesha"
+              width={800}
+              height={1000}
+              className={`rounded-lg mx-auto shadow-lg border-2 border-amber-400/50`}
+              priority
+            />
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] font-noto-serif-devanagari">
             {name} की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
