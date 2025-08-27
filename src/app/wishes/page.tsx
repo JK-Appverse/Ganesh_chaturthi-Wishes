@@ -10,6 +10,7 @@ import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import AdBanner from '@/components/AdBanner';
+import AdBanner2 from '@/components/AdBanner2';
 
 function WishesContent() {
   const searchParams = useSearchParams();
@@ -147,6 +148,7 @@ function WishesContent() {
       <footer className="text-center mt-8 text-sm text-white/60 z-10">
         <p>आपके लिए <Heart className="inline h-4 w-4 text-red-400 animate-pulse" /> से बनाया गया है।</p>
       </footer>
+      <AdBanner2 />
     </main>
   );
 }
