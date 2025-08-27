@@ -123,13 +123,13 @@ function WishesContent() {
               </Button>
             </form>
           </div>
+          <div className="z-10 mt-4 w-full max-w-lg">
+            <div id="container-fa891ecb3a8f703fb88dc290542b4046"></div>
+          </div>
       </div>
       <footer className="text-center mt-8 text-sm text-white/60 z-10">
         <p>आपके लिए <Heart className="inline h-4 w-4 text-red-400 animate-pulse" /> से बनाया गया है।</p>
       </footer>
-      <div className="z-10 mt-8 w-full max-w-lg">
-        <div id="container-fa891ecb3a8f703fb88dc290542b4046"></div>
-      </div>
     </main>
   );
 }
