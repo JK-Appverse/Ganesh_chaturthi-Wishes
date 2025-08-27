@@ -121,11 +121,11 @@ function WishesContent() {
         </CardContent>
       </Card>
       
-      <div className="z-10 w-full max-w-lg">
+      <div className="z-10 mt-4 w-full max-w-lg">
         <AdBanner />
       </div>
 
-      <div className="flex flex-col gap-4 z-10 w-full max-w-lg">
+      <div className="flex flex-col gap-4 z-10 w-full max-w-lg mt-4">
           <Button onClick={handleShare} className="w-full text-lg py-6 bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105">
             <Share2 className="mr-2" /> शेयर करें
           </Button>
