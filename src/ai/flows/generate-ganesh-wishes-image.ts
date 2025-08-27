@@ -38,7 +38,7 @@ const generateGaneshWishesImageFlow = ai.defineFlow(
   },
   async ({userName}) => {
     const {media} = await ai.generate({
-      prompt: `A beautiful, divine image of Lord Ganesha for Ganesh Chaturthi, with blessings. Include the text 'Happy Ganesh Chaturthi from ${userName}' in a subtle, elegant font. The image should have a gold color scheme (#D4AF37), a light cream background (#F5F5DC), and a deep saffron accent color (#FF9933).`,
+      prompt: `A beautiful, divine image of Lord Ganesha for Ganesh Chaturthi, with blessings. The image should be based on the style and composition of "https://i.postimg.cc/RVT1yS4v/ganesh-chaturthi-wishes-card-with-name-and-photo.jpg". Include the text 'Happy Ganesh Chaturthi from ${userName}' in a subtle, elegant font. The image should have a warm color palette with gold, saffron, and cream colors.`,
     });
 
     return {imageDataUri: media.url!};
