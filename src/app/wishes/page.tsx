@@ -115,7 +115,7 @@ function WishesContent() {
                 type="text"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                placeholder="किसी और का नाम लिखें"
+                placeholder="अपना नाम लिखें"
                 className="bg-background/80 text-white placeholder:text-gray-300 border-white/50 flex-grow"
               />
               <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">
