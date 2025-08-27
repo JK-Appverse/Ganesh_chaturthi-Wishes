@@ -71,13 +71,13 @@ function WishesContent() {
             {isImageLoading && (
               <Skeleton className="w-full h-[400px] rounded-lg bg-white/20" />
             )}
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                 src={imageUrl}
                 alt="Lord Ganesha"
                 width={800}
                 height={1000}
                 className={`rounded-lg mx-auto shadow-lg border-2 border-amber-400/50 ${isImageLoading ? 'hidden' : 'block'}`}
-                priority
                 onLoad={() => setIsImageLoading(false)}
               />
           </div>
