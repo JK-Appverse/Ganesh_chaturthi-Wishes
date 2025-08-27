@@ -19,8 +19,15 @@ function WishesContent() {
   const [quote, setQuote] = useState<string | null>(null);
   const [isQuoteLoading, setIsQuoteLoading] = useState(true);
   const [newName, setNewName] = useState('');
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     async function getWish() {
       if (!name) return;
       
@@ -42,7 +49,7 @@ function WishesContent() {
     }
     
     getWish();
-  }, [name, toast]);
+  }, [name, toast, isClient]);
 
   const handleShare = () => {
     if (navigator.share) {
@@ -74,6 +81,10 @@ function WishesContent() {
     }
     router.push(`/wishes?name=${encodeURIComponent(newName)}`);
   };
+
+  if (!isClient) {
+    return null; // or a loading skeleton
+  }
   
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-yellow-900 via-orange-900 to-red-900 p-4 font-body sm:p-6 md:p-8 text-white relative overflow-hidden">
