@@ -3,7 +3,6 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from '@/lib/utils';
 import { Noto_Serif_Devanagari } from 'next/font/google';
-import Script from 'next/script';
 
 const notoSerifDevanagari = Noto_Serif_Devanagari({
   subsets: ['devanagari'],
@@ -30,19 +29,6 @@ export default function RootLayout({
       <body className={cn("font-body antialiased", notoSerifDevanagari.variable)}>
         {children}
         <Toaster />
-        <Script id="native-banner-ad" strategy="afterInteractive">
-          {`
-            (function(w, d, o, s, id) {
-              if (d.getElementById(id)) return;
-              var js = d.createElement(s);
-              js.id = id;
-              js.src = o;
-              js.async = true;
-              js.setAttribute('data-cfasync', 'false');
-              d.getElementsByTagName('body')[0].appendChild(js);
-            })(window, document, '//pl27517644.profitableratecpm.com/fa891ecb3a8f703fb88dc290542b4046/invoke.js', 'script', 'container-fa891ecb3a8f703fb88dc290542b4046');
-          `}
-        </Script>
       </body>
     </html>
   );
