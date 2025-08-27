@@ -7,25 +7,29 @@ import { Heart, Loader2, Share2, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/hooks/use-toast";
-import { generateGaneshWish, GenerateGaneshWishOutput } from '@/ai/flows/generate-ganesh-wish';
+import { generateGaneshWish } from '@/ai/flows/generate-ganesh-wish';
+import { generateGaneshWishesImage } from '@/ai/flows/generate-ganesh-wishes-image';
 import { Skeleton } from '@/components/ui/skeleton';
 
 function WishesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const name = searchParams.get('name') || 'Friend';
+  const name = searchParams.get('name') || 'दोस्त';
   const { toast } = useToast();
 
-  const [wishData, setWishData] = useState<{quote: string} | null>(null);
   const [quote, setQuote] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [isQuoteLoading, setIsQuoteLoading] = useState(true);
 
   useEffect(() => {
     async function getWish() {
-      setIsLoading(true);
+      if (!name) return;
+      
+      setIsQuoteLoading(true);
       try {
         const result = await generateGaneshWish({ userName: name });
-        setWishData(result);
+        setQuote(result.quote);
       } catch (error) {
         console.error(error);
         toast({
@@ -34,27 +38,37 @@ function WishesContent() {
           description: "Could not generate a quote. Please try again.",
         });
       } finally {
-        setIsLoading(false);
+        setIsQuoteLoading(false);
       }
     }
-    if(name){
-      getWish();
+    
+    async function getImage() {
+        if (!name) return;
+        setIsImageLoading(true);
+        try {
+            const result = await generateGaneshWishesImage({ userName: name });
+            setImageUrl(result.imageDataUri);
+        } catch (error) {
+            console.error(error);
+            toast({
+              variant: "destructive",
+              title: "Failed to generate image",
+              description: "Could not generate an image. Please try again.",
+            });
+        } finally {
+            setIsImageLoading(false);
+        }
     }
-  }, [name, toast]);
 
-  useEffect(() => {
-    // This useEffect will only run on the client, after the first render.
-    // This avoids hydration mismatch for the randomly selected quote.
-    if (wishData) {
-      setQuote(wishData.quote);
-    }
-  }, [wishData]);
+    getWish();
+    getImage();
+  }, [name, toast]);
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: `${name} की ओर से गणेश चतुर्थी की शुभकामनाएं`,
-        text: `${name} की ओर से गणेश चतुर्थी की शुभकामनाएं!`,
+        text: `"${quote}" - ${name} की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ`,
         url: window.location.href,
       })
       .then(() => toast({ title: "सफलतापूर्वक साझा किया गया!" }))
@@ -74,22 +88,25 @@ function WishesContent() {
         <Card className="w-full max-w-lg shadow-2xl z-10 bg-black/30 backdrop-blur-md border-primary/40 animate-fade-in">
         <CardContent className="p-4 md:p-6 text-center">
           <div className="mb-4">
-            <Image
-              src="/ganesha-wishes.jpg"
-              alt="Lord Ganesha"
-              width={800}
-              height={1000}
-              className="rounded-lg mx-auto shadow-lg border-2 border-amber-400/50"
-              priority
-              data-ai-hint="ganesha"
-            />
+            {isImageLoading || !imageUrl ? (
+              <Skeleton className="w-full h-[400px] rounded-lg bg-white/20" />
+            ) : (
+               <Image
+                src={imageUrl}
+                alt="Lord Ganesha"
+                width={800}
+                height={1000}
+                className="rounded-lg mx-auto shadow-lg border-2 border-amber-400/50"
+                priority
+              />
+            )}
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] font-noto-serif-devanagari">
             {name} की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
           </h1>
 
           <div className="mt-6 text-orange-200/90 italic text-lg min-h-[6rem] flex items-center justify-center font-noto-serif-devanagari">
-            {isLoading || !quote ? (
+            {isQuoteLoading || !quote ? (
               <div className="space-y-2 w-full">
                 <Skeleton className="h-4 w-5/6 mx-auto bg-white/20" />
                 <Skeleton className="h-4 w-4/6 mx-auto bg-white/20" />
