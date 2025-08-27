@@ -120,7 +120,7 @@ function WishesContent() {
         </CardContent>
       </Card>
       
-      <div className="my-4 z-10">
+      <div className="z-10 w-full max-w-lg">
         <AdBanner />
       </div>
 
