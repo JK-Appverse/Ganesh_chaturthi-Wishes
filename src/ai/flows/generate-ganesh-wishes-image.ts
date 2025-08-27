@@ -9,7 +9,6 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import wav from 'wav';
 
 const GenerateGaneshWishesImageInputSchema = z.object({
   userName: z.string().describe('The name of the user.'),
