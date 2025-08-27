@@ -18,6 +18,7 @@ function WishesContent() {
 
   const [quote, setQuote] = useState<string | null>(null);
   const [isQuoteLoading, setIsQuoteLoading] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const imageUrl = '/ganesha.png'; // Using the image from the public folder
 
   useEffect(() => {
@@ -73,9 +74,11 @@ function WishesContent() {
               alt="Lord Ganesha"
               width={800}
               height={1000}
-              className={`rounded-lg mx-auto shadow-lg border-2 border-amber-400/50`}
+              className={`rounded-lg mx-auto shadow-lg border-2 border-amber-400/50 transition-opacity duration-500 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+              onLoad={() => setIsImageLoading(false)}
               priority
             />
+             {isImageLoading && <Skeleton className="w-full h-[500px] rounded-lg bg-white/20" />}
           </div>
           <h1 className="text-2xl md:text-3xl font-headline text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] font-noto-serif-devanagari">
             {name} की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
