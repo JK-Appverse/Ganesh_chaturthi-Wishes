@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-primary/10 via-background to-background p-4 font-body sm:p-6 md:p-8">
-      <div className="absolute inset-0 bg-[url(/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/traditional-mandala.png')] opacity-10"></div>
       <Card className="w-full max-w-md shadow-2xl z-10 border-primary/20 bg-card/80 backdrop-blur-sm">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 text-primary animate-pulse">

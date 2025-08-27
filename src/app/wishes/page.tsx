@@ -26,7 +26,6 @@ function WishesContent() {
       try {
         const result = await generateGaneshWish({ userName: name });
         setWishData(result);
-        setQuote(result.quote);
       } catch (error) {
         console.error(error);
         toast({
@@ -76,10 +75,10 @@ function WishesContent() {
         <CardContent className="p-4 md:p-6 text-center">
           <div className="mb-4">
             <Image
-              src="/ganesha.jpg"
+              src="/ganesha-wishes.jpg"
               alt="Lord Ganesha"
-              width={400}
-              height={400}
+              width={800}
+              height={1000}
               className="rounded-lg mx-auto shadow-lg border-2 border-amber-400/50"
               priority
               data-ai-hint="ganesha"
