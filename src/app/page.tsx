@@ -56,9 +56,9 @@ export default function Home() {
           <div className="mx-auto mb-4 text-primary animate-pulse">
             <GaneshaIcon className="h-20 w-20" />
           </div>
-          <CardTitle className="font-headline text-3xl md:text-4xl text-primary">Ganesh Chaturthi Wishes</CardTitle>
+          <CardTitle className="font-headline text-3xl md:text-4xl text-primary">गणेश चतुर्थी की शुभकामनाएं</CardTitle>
           <CardDescription className="pt-2 text-foreground/80">
-            Create a personalized greeting for your loved ones.
+            अपने प्रियजनों के लिए एक व्यक्तिगत ग्रीटिंग बनाएं।
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -69,9 +69,9 @@ export default function Home() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-foreground/90">Enter Your Name</FormLabel>
+                    <FormLabel className="text-foreground/90">अपना नाम दर्ज करें</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Jatin" {...field} className="bg-background/80" />
+                      <Input placeholder="उदा. जतिन" {...field} className="bg-background/80" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,10 +81,10 @@ export default function Home() {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Creating...
+                    बना रहा है...
                   </>
                 ) : (
-                  'Generate Wish'
+                  'शुभकामनाएं भेजें'
                 )}
               </Button>
             </form>
