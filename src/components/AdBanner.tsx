@@ -4,9 +4,12 @@ import { useEffect, useRef } from 'react';
 
 export function AdBanner() {
   const adRef = useRef<HTMLDivElement>(null);
+  const adLoaded = useRef(false);
 
   useEffect(() => {
-    if (adRef.current && adRef.current.children.length === 0) {
+    if (adRef.current && !adLoaded.current) {
+      adLoaded.current = true; // Mark as loaded to prevent re-execution
+      
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.innerHTML = `
