@@ -64,16 +64,16 @@ function WishesContent() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-yellow-900 via-orange-900 to-red-900 p-4 font-body sm:p-6 md:p-8 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/traditional-mandala.png')] opacity-10"></div>
-        <Card className="w-full max-w-lg shadow-2xl z-10 bg-black/30 backdrop-blur-md border-primary/40 animate-fade-in">
+        <Card className="w-full max-w-lg shadow-2xl z-10 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 animate-background-pan [background-size:200%_200%] border-primary/40">
         <CardContent className="p-4 md:p-6 text-center">
-          <div className="flex justify-center mb-4 text-primary">
-            <GaneshaIcon className="h-24 w-24" />
+          <div className="flex justify-center mb-4 text-white">
+            <GaneshaIcon className="h-24 w-24 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
           </div>
-          <h1 className="text-2xl md:text-3xl font-headline text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] font-noto-serif-devanagari">
+          <h1 className="text-2xl md:text-3xl font-headline text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] font-noto-serif-devanagari">
             {name} की ओर से गणेश चतुर्थी की हार्दिक शुभकामनाएँ
           </h1>
 
-          <div className="mt-6 text-orange-200/90 italic text-lg min-h-[6rem] flex items-center justify-center font-noto-serif-devanagari">
+          <div className="mt-6 text-white/90 italic text-lg min-h-[6rem] flex items-center justify-center font-noto-serif-devanagari">
             {isQuoteLoading || !quote ? (
               <div className="space-y-2 w-full">
                 <Skeleton className="h-4 w-5/6 mx-auto bg-white/20" />
