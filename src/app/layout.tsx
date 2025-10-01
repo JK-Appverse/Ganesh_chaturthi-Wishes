@@ -1,17 +1,15 @@
 import type {Metadata} from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
-import { Noto_Serif_Devanagari } from 'next/font/google';
+import { Header } from '@/components/Header';
 
-const notoSerifDevanagari = Noto_Serif_Devanagari({
-  subsets: ['devanagari'],
-  variable: '--font-noto-serif-devanagari',
-});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: 'Ganesh Wishes Generator',
-  description: 'Create personalized Ganesh Chaturthi greetings for your loved ones.',
+  title: 'MP Study - Your Gateway to MPPSC Success',
+  description: 'Comprehensive quiz platform for MPPSC and other Madhya Pradesh state exams.',
 };
 
 export default function RootLayout({
@@ -21,13 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-      </head>
-      <body className={cn("font-body antialiased", notoSerifDevanagari.variable)}>
-        {children}
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+        <Header />
+        <main>{children}</main>
         <Toaster />
       </body>
     </html>

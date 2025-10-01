@@ -1,96 +1,87 @@
 'use client';
-
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { useRouter } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { GaneshaIcon } from '@/components/icons';
-import { useToast } from "@/hooks/use-toast";
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Name must be at least 2 characters.',
-  }),
-});
+import { Book, History, Scale, Sparkles, Trophy } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-    },
-  });
+  const handleStartQuiz = (category: string) => {
+    router.push(`/quiz?category=${category}`);
+  };
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    try {
-      // Redirect to the wishes page with the name as a query parameter
-      router.push(`/wishes?name=${encodeURIComponent(values.name)}`);
-    } catch (error) {
-      console.error(error);
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem creating your wish. Please try again.",
-      });
-      setIsLoading(false);
-    }
-  }
+  const studySections = [
+    {
+      title: 'मध्य प्रदेश का इतिहास',
+      description: 'प्राचीन काल से लेकर आधुनिक युग तक के ऐतिहासिक तथ्यों का अभ्यास करें।',
+      icon: <History className="w-8 h-8 text-primary" />,
+      category: 'history',
+    },
+    {
+      title: 'मध्य प्रदेश की राजनीति',
+      description: 'राज्य की राजनीतिक व्यवस्था, महत्वपूर्ण अधिनियमों और राजनेताओं को जानें।',
+      icon: <Scale className="w-8 h-8 text-primary" />,
+      category: 'politics',
+    },
+    {
+      title: 'MPPSC के लिए MP',
+      description: 'MPPSC परीक्षा के लिए विशेष रूप से डिज़ाइन किए गए प्रश्नों का अभ्यास करें।',
+      icon: <Book className="w-8 h-8 text-primary" />,
+      category: 'mppsc',
+    },
+    {
+      title: 'अभ्यास (Practice)',
+      description: 'सभी विषयों के मिश्रित प्रश्नों के साथ अपने ज्ञान का परीक्षण करें।',
+      icon: <Sparkles className="w-8 h-8 text-primary" />,
+      category: 'practice',
+    },
+  ];
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-primary/10 via-background to-background p-4 font-body sm:p-6 md:p-8">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/traditional-mandala.png')] opacity-10"></div>
-      <Card className="w-full max-w-md shadow-2xl z-10 border-primary/20 bg-card/80 backdrop-blur-sm">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4 text-primary animate-pulse">
-            <GaneshaIcon className="h-20 w-20" />
+    <div className="container mx-auto px-4 py-8">
+      <section className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">MP Study में आपका स्वागत है</h1>
+        <p className="text-lg md:text-xl text-muted-foreground">MPPSC और अन्य प्रतियोगी परीक्षाओं में सफलता की ओर आपका पहला कदम।</p>
+      </section>
+      
+      <Card className="mb-12 bg-secondary/30 border-primary/50 shadow-lg">
+        <CardHeader className="flex flex-row items-center gap-4">
+          <Trophy className="w-12 h-12 text-yellow-400" />
+          <div>
+            <CardTitle className="text-2xl font-bold">MPPSC डेली सुपर टेस्ट</CardTitle>
+            <CardDescription>आज के 2-घंटे के नॉन-स्टॉप चैलेंज के लिए तैयार हो जाइए।</CardDescription>
           </div>
-          <CardTitle className="font-headline text-3xl md:text-4xl text-primary">गणेश चतुर्थी की शुभकामनाएं</CardTitle>
-          <CardDescription className="pt-2 text-foreground/80">
-            अपने प्रियजनों के लिए एक व्यक्तिगत ग्रीटिंग बनाएं।
-          </CardDescription>
         </CardHeader>
         <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground/90">अपना नाम दर्ज करें</FormLabel>
-                    <FormControl>
-                      <Input placeholder="उदा. जतिन" {...field} className="bg-background/80" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" disabled={isLoading} className="w-full text-lg py-6 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90 transition-all duration-300 transform hover:scale-105">
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    बना रहा है...
-                  </>
-                ) : (
-                  'शुभकामनाएं भेजें'
-                )}
-              </Button>
-            </form>
-          </Form>
+          <p className="mb-4">यह टेस्ट आपकी तैयारी को परखने का एक बेहतरीन मौका है। टेस्ट के दौरान आप रुक नहीं सकते। क्या आप तैयार हैं?</p>
+          <Button size="lg" className="w-full" onClick={() => handleStartQuiz('super_test')}>
+            सुपर टेस्ट शुरू करें
+          </Button>
         </CardContent>
       </Card>
-    </main>
+
+      <section>
+        <h2 className="text-3xl font-bold text-center mb-8">अध्ययन अनुभाग</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {studySections.map((section) => (
+            <Card key={section.title} className="hover:shadow-primary/20 hover:shadow-lg transition-shadow">
+              <CardHeader className="flex flex-row items-start gap-4">
+                {section.icon}
+                <div>
+                  <CardTitle>{section.title}</CardTitle>
+                  <CardDescription>{section.description}</CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full" variant="outline" onClick={() => handleStartQuiz(section.category)}>
+                  अभी अभ्यास करें
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
