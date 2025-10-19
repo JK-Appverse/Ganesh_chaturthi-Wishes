@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gift, Share2 } from 'lucide-react';
+import { Gift, Share2, PenSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 function WishContent() {
@@ -85,16 +85,16 @@ function WishContent() {
             <Share2 className="mr-2" />
             WhatsApp पर साझा करें
           </Button>
+          <Button onClick={() => router.push('/')} variant="outline" className="w-full">
+            <PenSquare className="mr-2" />
+            अपने नाम का बनाएँ
+          </Button>
           <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer" className="w-full">
             <Button type="button" size="lg" className="w-full text-lg bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 text-white hover:bg-gradient-to-br">
                 <Gift className="mr-2" />
                 आपके लिए एक तोहफा
             </Button>
           </a>
-          <Button onClick={() => router.push('/')} variant="outline" className="w-full">
-            <Gift className="mr-2" />
-            एक और शुभकामना बनाएँ
-          </Button>
         </CardFooter>
       </Card>
       
