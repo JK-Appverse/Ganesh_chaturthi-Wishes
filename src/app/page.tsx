@@ -1,26 +1,25 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sparkles, Gift, Share2, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { generateDiwaliWish } from '@/ai/flows/generate-diwali-wish';
-
 
 export default function Home() {
   const [name, setName] = useState('');
-  const [wish, setWish] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const handleCreateWish = async (e: React.FormEvent) => {
+  const handleCreateWish = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
       toast({
@@ -31,60 +30,8 @@ export default function Home() {
       return;
     }
     setIsLoading(true);
-    setWish('');
-    try {
-      const response = await generateDiwaliWish({ userName: name });
-      setWish(response.quote);
-    } catch (error) {
-      console.error(error);
-      toast({
-        variant: "destructive",
-        title: "अरे नहीं!",
-        description: "शुभकामना बनाते समय कुछ गलत हो गया। कृपया दोबारा प्रयास करें।",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    router.push(`/wish?name=${encodeURIComponent(name)}`);
   };
-  
-  const handleShare = async () => {
-    const shareText = `*${name} की ओर से दिवाली की शुभकामनाएँ!*\n\n${wish}\n\nआप भी अपनी व्यक्तिगत शुभकामना बनाएँ!`;
-    const shareUrl = window.location.href;
-    
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'दिवाली की शुभकामनाएँ',
-          text: shareText,
-          url: shareUrl,
-        });
-      } catch (error) {
-        console.error('Sharing failed', error);
-        // Fallback to copying to clipboard
-        await copyToClipboard(shareText);
-      }
-    } else {
-        await copyToClipboard(shareText);
-    }
-  };
-
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      toast({
-        title: "कॉपी किया गया!",
-        description: "शुभकामना संदेश आपके क्लिपबोर्ड पर कॉपी हो गया है।",
-      });
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-      toast({
-        variant: 'destructive',
-        title: 'कॉपी करने में विफल',
-        description: 'आपका ब्राउज़र क्लिपबोर्ड पर कॉपी करने का समर्थन नहीं करता है।',
-      });
-    }
-  };
-
 
   return (
     <div className="diwali-gradient-bg relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center p-4">
@@ -107,55 +54,33 @@ export default function Home() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {!wish ? (
-              <form onSubmit={handleCreateWish} className="space-y-4 text-center">
-                <Input
-                  type="text"
-                  placeholder="अपना नाम दर्ज करें"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="text-center text-lg h-12 bg-white/10 placeholder:text-gray-400 focus:ring-2 ring-offset-background"
-                  disabled={isLoading}
-                />
-                <Button type="submit" size="lg" className="w-full text-lg" disabled={isLoading}>
-                  {isLoading ? (
-                    <Loader2 className="animate-spin" />
-                  ) : (
-                    <>
-                      <Sparkles className="mr-2" />
-                      शुभकामना बनाएँ
-                    </>
-                  )}
+            <form onSubmit={handleCreateWish} className="space-y-4 text-center">
+              <Input
+                type="text"
+                placeholder="अपना नाम दर्ज करें"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="text-center text-lg h-12 bg-white/10 placeholder:text-gray-400 focus:ring-2 ring-offset-background"
+                disabled={isLoading}
+              />
+              <Button type="submit" size="lg" className="w-full text-lg" disabled={isLoading}>
+                {isLoading ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  <>
+                    <Sparkles className="mr-2" />
+                    शुभकामना बनाएँ
+                  </>
+                )}
+              </Button>
+              <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer">
+                <Button type="button" size="lg" className="w-full text-lg mt-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-500 text-white hover:bg-gradient-to-br">
+                   <Gift className="mr-2" />
+                   आपके लिए एक तोहफा
                 </Button>
-                <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer">
-                  <Button type="button" size="lg" className="w-full text-lg mt-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-500 text-white hover:bg-gradient-to-br">
-                     <Gift className="mr-2" />
-                     आपके लिए एक तोहफा
-                  </Button>
-                </a>
-              </form>
-            ) : (
-              <div className="text-center space-y-6">
-                <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
-                  " {wish} "
-                </blockquote>
-                <p className="text-lg text-yellow-400 font-semibold">- {name}</p>
-              </div>
-            )}
+              </a>
+            </form>
           </CardContent>
-
-          {wish && (
-              <CardFooter className="flex-col gap-4">
-                  <Button onClick={handleShare} className="w-full text-md bg-green-600 hover:bg-green-700">
-                      <Share2 className="mr-2" />
-                      WhatsApp पर साझा करें
-                  </Button>
-                   <Button onClick={() => { setWish(''); setName(''); }} variant="outline" className="w-full">
-                      <Gift className="mr-2" />
-                      एक और शुभकामना बनाएँ
-                  </Button>
-              </CardFooter>
-          )}
         </Card>
       )}
       
