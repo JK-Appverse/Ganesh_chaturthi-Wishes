@@ -85,6 +85,12 @@ function WishContent() {
             <Share2 className="mr-2" />
             WhatsApp पर साझा करें
           </Button>
+          <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer" className="w-full">
+            <Button type="button" size="lg" className="w-full text-lg bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 text-white hover:bg-gradient-to-br">
+                <Gift className="mr-2" />
+                आपके लिए एक तोहफा
+            </Button>
+          </a>
           <Button onClick={() => router.push('/')} variant="outline" className="w-full">
             <Gift className="mr-2" />
             एक और शुभकामना बनाएँ
