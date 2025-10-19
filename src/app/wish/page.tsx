@@ -95,6 +95,12 @@ function WishContent() {
                 आपके लिए एक तोहफा
             </Button>
           </a>
+           <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer" className="w-full">
+            <Button type="button" size="lg" className="w-full text-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white hover:bg-gradient-to-br">
+               <Star className="mr-2" />
+               एक और तोहफा!
+            </Button>
+          </a>
         </CardFooter>
       </Card>
       
