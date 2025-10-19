@@ -1,10 +1,12 @@
 import type {Metadata} from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Alegreya } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const alegreya = Alegreya({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-alegreya' });
+
 
 export const metadata: Metadata = {
   title: 'शुभ दिवाली - आपकी व्यक्तिगत शुभकामनाएँ',
@@ -18,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable, alegreya.variable)}>
         <main>{children}</main>
         <Toaster />
       </body>

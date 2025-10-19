@@ -64,8 +64,8 @@ function WishContent() {
 
       <Card className="w-full max-w-lg bg-black/30 backdrop-blur-md border-primary/50 z-10 shadow-2xl shadow-primary/20">
         <CardHeader className="text-center">
-          <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-500 to-yellow-400">
-            शुभकामनाएँ
+          <CardTitle className="text-5xl font-bold font-alegreya text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+            शुभ दिवाली
           </CardTitle>
         </CardHeader>
         <CardContent>

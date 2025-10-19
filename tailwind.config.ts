@@ -18,6 +18,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        alegreya: ['var(--font-alegreya)', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
