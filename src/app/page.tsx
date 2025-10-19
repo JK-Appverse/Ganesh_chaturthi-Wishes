@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Sparkles, Loader2 } from 'lucide-react';
+import { Sparkles, Loader2, Gift } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import AdUnit from '@/components/AdUnit';
 
@@ -32,6 +32,10 @@ export default function Home() {
     }
     setIsLoading(true);
     router.push(`/wish?name=${encodeURIComponent(name)}`);
+  };
+
+  const handleGiftClick = () => {
+    window.open('https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae', '_blank');
   };
 
   return (
@@ -77,6 +81,14 @@ export default function Home() {
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-4 justify-center items-center">
+            <Button
+                onClick={handleGiftClick}
+                size="lg"
+                className="w-full text-lg bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-500 text-white hover:bg-gradient-to-br"
+              >
+                <Gift className="mr-2" />
+                आपके लिए एक तोहफा
+            </Button>
             <AdUnit />
           </CardFooter>
         </Card>

@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Share2, PenSquare } from 'lucide-react';
+import { Share2, PenSquare, Gift } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import AdUnit from '@/components/AdUnit';
 
@@ -52,6 +52,10 @@ function WishContent() {
     }
   };
 
+  const handleGiftClick = () => {
+    window.open('https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae', '_blank');
+  };
+
   return (
     <div className="diwali-gradient-bg relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center p-4">
       <div className="fireworks-bg">
@@ -89,6 +93,13 @@ function WishContent() {
           <Button onClick={() => router.push('/')} variant="outline" className="w-full">
             <PenSquare className="mr-2" />
             अपने नाम का बनाएँ
+          </Button>
+          <Button
+            onClick={handleGiftClick}
+            className="w-full text-md bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-500 text-white hover:bg-gradient-to-br"
+          >
+            <Gift className="mr-2" />
+            आपके लिए एक तोहफा
           </Button>
           <AdUnit />
         </CardFooter>
