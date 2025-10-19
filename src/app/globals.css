@@ -61,7 +61,6 @@
 .diwali-gradient-bg {
   background: linear-gradient(-45deg, #FF6B6B, #FFD93D, #6B4226, #3A1C1C);
   background-size: 400% 400%;
-  animation: background-pan 15s ease-in-out infinite;
 }
 
 .fireworks-bg {
@@ -102,18 +101,6 @@
   100% {
     transform: scale(15);
     opacity: 0;
-  }
-}
-
-@keyframes background-pan {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
   }
 }
 
