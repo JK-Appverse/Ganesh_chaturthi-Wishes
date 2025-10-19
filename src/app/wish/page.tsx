@@ -74,7 +74,7 @@ function WishContent() {
               {name}
             </h3>
             <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
-              " {wish} "
+              {wish}
             </blockquote>
           </div>
         </CardContent>
