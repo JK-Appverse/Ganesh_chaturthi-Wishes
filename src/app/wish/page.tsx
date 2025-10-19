@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gift, Share2, PenSquare } from 'lucide-react';
+import { Gift, Share2, PenSquare, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 function WishContent() {
@@ -93,6 +93,12 @@ function WishContent() {
             <Button type="button" size="lg" className="w-full text-lg bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 text-white hover:bg-gradient-to-br">
                 <Gift className="mr-2" />
                 आपके लिए एक तोहफा
+            </Button>
+          </a>
+          <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer" className="w-full">
+            <Button type="button" size="lg" className="w-full text-lg bg-gradient-to-r from-green-500 via-emerald-500 to-green-500 text-white hover:bg-gradient-to-br">
+               <Star className="mr-2" />
+               विशेष दिवाली ऑफर
             </Button>
           </a>
         </CardFooter>
