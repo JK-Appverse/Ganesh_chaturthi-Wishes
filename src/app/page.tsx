@@ -110,7 +110,7 @@ export default function Home() {
                   priority
                 />
             </div>
-            <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 animate-background-pan">
+            <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-500 to-yellow-400">
               शुभ दिवाली
             </CardTitle>
             <CardDescription className="text-amber-200/80 pt-2">
