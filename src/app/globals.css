@@ -58,6 +58,12 @@
   }
 }
 
+.diwali-gradient-bg {
+  background: linear-gradient(-45deg, #2c041d, #420a30, #630f42, #851453);
+  background-size: 400% 400%;
+  animation: background-pan 15s ease-in-out infinite;
+}
+
 .fireworks-bg {
   position: absolute;
   top: 0;

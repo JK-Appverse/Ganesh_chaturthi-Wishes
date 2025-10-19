@@ -88,7 +88,7 @@ export default function Home() {
 
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center p-4">
+    <div className="diwali-gradient-bg relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center p-4">
       <div className="fireworks-bg">
         <div className="firework"></div>
         <div className="firework"></div>
