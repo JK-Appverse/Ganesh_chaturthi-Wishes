@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sparkles, Gift, Share2, Loader2 } from 'lucide-react';
-import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { generateDiwaliWish } from '@/ai/flows/generate-diwali-wish';
 
@@ -109,7 +108,7 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             {!wish ? (
-              <form onSubmit={handleCreateWish} className="space-y-4">
+              <form onSubmit={handleCreateWish} className="space-y-4 text-center">
                 <Input
                   type="text"
                   placeholder="अपना नाम दर्ज करें"
@@ -128,6 +127,12 @@ export default function Home() {
                     </>
                   )}
                 </Button>
+                <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer">
+                  <Button type="button" variant="outline" size="lg" className="w-full text-lg mt-2">
+                     <Gift className="mr-2" />
+                     आपके लिए एक तोहफा
+                  </Button>
+                </a>
               </form>
             ) : (
               <div className="text-center space-y-6">
