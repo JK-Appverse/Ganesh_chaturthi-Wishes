@@ -14,17 +14,16 @@ function WishContent() {
   const { toast } = useToast();
 
   const wish = `की ओर से दिवाली की आपको हार्दिक शुभकामनाएँ`;
+  const diwaliThought = `दीयों की रोशनी से झिलमिलाता आँगन हो, पटाखों की गूँजों से आसमां रोशन हो। ऐसी आए झूम के यह दिवाली, हर तरफ खुशियों का मौसम हो।`;
 
   const handleShare = async () => {
-    const shareText = `*${name} ${wish}*`;
-    const shareUrl = window.location.origin;
-
+    const shareText = `*${name} ${wish}*\n\n${diwaliThought}\n\nयहां अपनी खुद की शुभकामना बनाएं: ${window.location.origin}`;
+    
     if (navigator.share) {
       try {
         await navigator.share({
           title: 'दिवाली की शुभकामनाएँ',
           text: shareText,
-          url: shareUrl,
         });
       } catch (error) {
         console.error('Sharing failed', error);
@@ -69,12 +68,15 @@ function WishContent() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-6">
             <h3 className="text-5xl font-alegreya font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent animate-text-shimmer bg-[200%_auto]">
               {name}
             </h3>
-            <p className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
+            <p className="text-xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
               {wish}
+            </p>
+            <p className="text-lg text-amber-200/80 leading-relaxed font-alegreya">
+              {diwaliThought}
             </p>
           </div>
         </CardContent>
