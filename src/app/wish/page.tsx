@@ -70,12 +70,12 @@ function WishContent() {
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
-            <h3 className="text-4xl font-alegreya font-bold bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
+            <h3 className="text-5xl font-alegreya font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent animate-text-shimmer bg-[200%_auto]">
               {name}
             </h3>
-            <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
+            <p className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
               {wish}
-            </blockquote>
+            </p>
           </div>
         </CardContent>
         <CardFooter className="flex-col gap-4">
