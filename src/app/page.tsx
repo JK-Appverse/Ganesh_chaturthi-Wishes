@@ -114,7 +114,7 @@ export default function Home() {
               शुभ दिवाली
             </CardTitle>
             <CardDescription className="text-amber-200/80 pt-2">
-              AI की मदद से बनाएँ, अपने प्रियजनों के लिए एक व्यक्तिगत दिवाली संदेश।
+              बनाएँ, अपने प्रियजनों के लिए एक व्यक्तिगत दिवाली संदेश।
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -165,7 +165,7 @@ export default function Home() {
       )}
       
       <footer className="absolute bottom-4 text-center text-sm text-white/50 z-10">
-        AI के साथ बनाया गया। दिवाली की हार्दिक शुभकामनाएँ!
+        दिवाली की हार्दिक शुभकामनाएँ!
       </footer>
     </div>
   );
