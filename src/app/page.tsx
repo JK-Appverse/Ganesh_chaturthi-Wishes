@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sparkles, Gift, Share2, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
@@ -113,6 +113,9 @@ export default function Home() {
             <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 animate-background-pan">
               शुभ दिवाली
             </CardTitle>
+            <CardDescription className="text-amber-200/80 pt-2">
+              AI की मदद से बनाएँ, अपने प्रियजनों के लिए एक व्यक्तिगत दिवाली संदेश।
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {!wish ? (
