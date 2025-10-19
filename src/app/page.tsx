@@ -79,12 +79,6 @@ export default function Home() {
                    आपके लिए एक तोहफा
                 </Button>
               </a>
-               <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer" className="w-full">
-                <Button type="button" size="lg" className="w-full text-lg mt-2 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500 text-white hover:bg-gradient-to-br">
-                   <Star className="mr-2" />
-                   विशेष दिवाली ऑफर
-                </Button>
-              </a>
             </form>
           </CardContent>
         </Card>
