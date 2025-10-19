@@ -67,7 +67,7 @@ function WishContent() {
             शुभ दिवाली
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="text-center space-y-6">
             <h3 className="text-5xl font-alegreya font-bold bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-500 bg-clip-text text-transparent animate-text-shimmer bg-[200%_auto]">
               {name}
