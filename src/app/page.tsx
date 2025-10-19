@@ -1,87 +1,162 @@
 'use client';
+
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Book, History, Scale, Sparkles, Trophy } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Sparkles, Gift, Share2, Loader2 } from 'lucide-react';
+import Image from 'next/image';
+import { useToast } from '@/hooks/use-toast';
+import { generateDiwaliWish } from '@/ai/flows/generate-diwali-wish';
+
 
 export default function Home() {
-  const router = useRouter();
+  const [name, setName] = useState('');
+  const [wish, setWish] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleStartQuiz = (category: string) => {
-    router.push(`/quiz?category=${category}`);
+  const handleCreateWish = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      toast({
+        variant: "destructive",
+        title: "नाम आवश्यक है",
+        description: "कृपया शुभकामना बनाने के लिए अपना नाम दर्ज करें।",
+      });
+      return;
+    }
+    setIsLoading(true);
+    setWish('');
+    try {
+      const response = await generateDiwaliWish({ userName: name });
+      setWish(response.quote);
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "अरे नहीं!",
+        description: "शुभकामना बनाते समय कुछ गलत हो गया। कृपया दोबारा प्रयास करें।",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const handleShare = async () => {
+    const shareText = `*${name} की ओर से दिवाली की शुभकामनाएँ!*\n\n${wish}\n\nआप भी अपनी व्यक्तिगत शुभकामना बनाएँ!`;
+    const shareUrl = window.location.href;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'दिवाली की शुभकामनाएँ',
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch (error) {
+        console.error('Sharing failed', error);
+        // Fallback to copying to clipboard
+        await copyToClipboard(shareText);
+      }
+    } else {
+        await copyToClipboard(shareText);
+    }
   };
 
-  const studySections = [
-    {
-      title: 'मध्य प्रदेश का इतिहास',
-      description: 'प्राचीन काल से लेकर आधुनिक युग तक के ऐतिहासिक तथ्यों का अभ्यास करें।',
-      icon: <History className="w-8 h-8 text-primary" />,
-      category: 'history',
-    },
-    {
-      title: 'मध्य प्रदेश की राजनीति',
-      description: 'राज्य की राजनीतिक व्यवस्था, महत्वपूर्ण अधिनियमों और राजनेताओं को जानें।',
-      icon: <Scale className="w-8 h-8 text-primary" />,
-      category: 'politics',
-    },
-    {
-      title: 'MPPSC के लिए MP',
-      description: 'MPPSC परीक्षा के लिए विशेष रूप से डिज़ाइन किए गए प्रश्नों का अभ्यास करें।',
-      icon: <Book className="w-8 h-8 text-primary" />,
-      category: 'mppsc',
-    },
-    {
-      title: 'अभ्यास (Practice)',
-      description: 'सभी विषयों के मिश्रित प्रश्नों के साथ अपने ज्ञान का परीक्षण करें।',
-      icon: <Sparkles className="w-8 h-8 text-primary" />,
-      category: 'practice',
-    },
-  ];
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({
+        title: "कॉपी किया गया!",
+        description: "शुभकामना संदेश आपके क्लिपबोर्ड पर कॉपी हो गया है।",
+      });
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      toast({
+        variant: 'destructive',
+        title: 'कॉपी करने में विफल',
+        description: 'आपका ब्राउज़र क्लिपबोर्ड पर कॉपी करने का समर्थन नहीं करता है।',
+      });
+    }
+  };
+
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <section className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">MP Study में आपका स्वागत है</h1>
-        <p className="text-lg md:text-xl text-muted-foreground">MPPSC और अन्य प्रतियोगी परीक्षाओं में सफलता की ओर आपका पहला कदम।</p>
-      </section>
-      
-      <Card className="mb-12 bg-secondary/30 border-primary/50 shadow-lg">
-        <CardHeader className="flex flex-row items-center gap-4">
-          <Trophy className="w-12 h-12 text-yellow-400" />
-          <div>
-            <CardTitle className="text-2xl font-bold">MPPSC डेली सुपर टेस्ट</CardTitle>
-            <CardDescription>आज के 2-घंटे के नॉन-स्टॉप चैलेंज के लिए तैयार हो जाइए।</CardDescription>
+    <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center p-4">
+      <div className="fireworks-bg">
+        <div className="firework"></div>
+        <div className="firework"></div>
+        <div className="firework"></div>
+        <div className="firework"></div>
+        <div className="firework"></div>
+      </div>
+
+      <Card className="w-full max-w-lg bg-black/30 backdrop-blur-md border-primary/50 z-10 shadow-2xl shadow-primary/20">
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-4">
+              <Image 
+                src="https://i.postimg.cc/13YMLsD1/61793-1.png"
+                alt="Goddess Lakshmi" 
+                width={128} 
+                height={128}
+                className="drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]"
+                priority
+              />
           </div>
+          <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 animate-background-pan">
+            शुभ दिवाली
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="mb-4">यह टेस्ट आपकी तैयारी को परखने का एक बेहतरीन मौका है। टेस्ट के दौरान आप रुक नहीं सकते। क्या आप तैयार हैं?</p>
-          <Button size="lg" className="w-full" onClick={() => handleStartQuiz('super_test')}>
-            सुपर टेस्ट शुरू करें
-          </Button>
+          {!wish ? (
+            <form onSubmit={handleCreateWish} className="space-y-4">
+              <Input
+                type="text"
+                placeholder="अपना नाम दर्ज करें"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="text-center text-lg h-12 bg-white/10 placeholder:text-gray-400 focus:ring-2 ring-offset-background"
+                disabled={isLoading}
+              />
+              <Button type="submit" size="lg" className="w-full text-lg" disabled={isLoading}>
+                {isLoading ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  <>
+                    <Sparkles className="mr-2" />
+                    शुभकामना बनाएँ
+                  </>
+                )}
+              </Button>
+            </form>
+          ) : (
+            <div className="text-center space-y-6">
+              <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
+                " {wish} "
+              </blockquote>
+              <p className="text-lg text-yellow-400 font-semibold">- {name}</p>
+            </div>
+          )}
         </CardContent>
-      </Card>
 
-      <section>
-        <h2 className="text-3xl font-bold text-center mb-8">अध्ययन अनुभाग</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {studySections.map((section) => (
-            <Card key={section.title} className="hover:shadow-primary/20 hover:shadow-lg transition-shadow">
-              <CardHeader className="flex flex-row items-start gap-4">
-                {section.icon}
-                <div>
-                  <CardTitle>{section.title}</CardTitle>
-                  <CardDescription>{section.description}</CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Button className="w-full" variant="outline" onClick={() => handleStartQuiz(section.category)}>
-                  अभी अभ्यास करें
+        {wish && (
+            <CardFooter className="flex-col gap-4">
+                <Button onClick={handleShare} className="w-full text-md bg-green-600 hover:bg-green-700">
+                    <Share2 className="mr-2" />
+                    WhatsApp पर साझा करें
                 </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+                 <Button onClick={() => { setWish(''); setName(''); }} variant="outline" className="w-full">
+                    <Gift className="mr-2" />
+                    एक और शुभकामना बनाएँ
+                </Button>
+            </CardFooter>
+        )}
+      </Card>
+      
+      <footer className="absolute bottom-4 text-center text-sm text-white/50 z-10">
+        AI के साथ बनाया गया। दिवाली की हार्दिक शुभकामनाएँ!
+      </footer>
     </div>
   );
 }
