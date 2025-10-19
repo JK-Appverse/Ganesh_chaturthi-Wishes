@@ -13,10 +13,10 @@ function WishContent() {
   const name = searchParams.get('name') || 'दोस्त';
   const { toast } = useToast();
 
-  const wish = `${name} की ओर से दिवाली की आपको हार्दिक शुभकामनाएँ`;
+  const wish = `की ओर से दिवाली की आपको हार्दिक शुभकामनाएँ`;
 
   const handleShare = async () => {
-    const shareText = `*${wish}*`;
+    const shareText = `*${name} ${wish}*`;
     const shareUrl = window.location.origin;
 
     if (navigator.share) {
@@ -69,7 +69,10 @@ function WishContent() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center space-y-6">
+          <div className="text-center space-y-4">
+            <h3 className="text-4xl font-alegreya font-bold bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
+              {name}
+            </h3>
             <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
               " {wish} "
             </blockquote>
