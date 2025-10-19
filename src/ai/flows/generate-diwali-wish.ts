@@ -32,6 +32,7 @@ const prompt = ai.definePrompt({
   name: 'diwaliWishPrompt',
   input: {schema: GenerateDiwaliWishInputSchema},
   output: {schema: GenerateDiwaliWishOutputSchema},
+  model: 'googleai/gemini-1.5-flash-latest',
   prompt: `Generate a short, inspiring, and beautiful Diwali wish in Hindi for a user named {{{userName}}}. The wish should be unique, festive, and heartfelt. It should invoke themes of light, prosperity, and happiness. Do not repeat the same wish. Ensure the output is only the quote text in JSON format.`,
 });
 
