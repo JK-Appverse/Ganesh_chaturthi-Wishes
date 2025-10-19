@@ -100,16 +100,6 @@ export default function Home() {
       {isClient && (
         <Card className="w-full max-w-lg bg-black/30 backdrop-blur-md border-primary/50 z-10 shadow-2xl shadow-primary/20">
           <CardHeader className="text-center">
-            <div className="mx-auto mb-4">
-                <Image 
-                  src="https://i.postimg.cc/13YMLsD1/61793-1.png"
-                  alt="Goddess Lakshmi" 
-                  width={128} 
-                  height={128}
-                  className="drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]"
-                  priority
-                />
-            </div>
             <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-500 to-yellow-400">
               शुभ दिवाली
             </CardTitle>
