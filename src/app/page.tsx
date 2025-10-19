@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +14,12 @@ export default function Home() {
   const [name, setName] = useState('');
   const [wish, setWish] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleCreateWish = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,67 +97,69 @@ export default function Home() {
         <div className="firework"></div>
       </div>
 
-      <Card className="w-full max-w-lg bg-black/30 backdrop-blur-md border-primary/50 z-10 shadow-2xl shadow-primary/20">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4">
-              <Image 
-                src="https://i.postimg.cc/13YMLsD1/61793-1.png"
-                alt="Goddess Lakshmi" 
-                width={128} 
-                height={128}
-                className="drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]"
-                priority
-              />
-          </div>
-          <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 animate-background-pan">
-            शुभ दिवाली
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {!wish ? (
-            <form onSubmit={handleCreateWish} className="space-y-4">
-              <Input
-                type="text"
-                placeholder="अपना नाम दर्ज करें"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="text-center text-lg h-12 bg-white/10 placeholder:text-gray-400 focus:ring-2 ring-offset-background"
-                disabled={isLoading}
-              />
-              <Button type="submit" size="lg" className="w-full text-lg" disabled={isLoading}>
-                {isLoading ? (
-                  <Loader2 className="animate-spin" />
-                ) : (
-                  <>
-                    <Sparkles className="mr-2" />
-                    शुभकामना बनाएँ
-                  </>
-                )}
-              </Button>
-            </form>
-          ) : (
-            <div className="text-center space-y-6">
-              <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
-                " {wish} "
-              </blockquote>
-              <p className="text-lg text-yellow-400 font-semibold">- {name}</p>
+      {isClient && (
+        <Card className="w-full max-w-lg bg-black/30 backdrop-blur-md border-primary/50 z-10 shadow-2xl shadow-primary/20">
+          <CardHeader className="text-center">
+            <div className="mx-auto mb-4">
+                <Image 
+                  src="https://i.postimg.cc/13YMLsD1/61793-1.png"
+                  alt="Goddess Lakshmi" 
+                  width={128} 
+                  height={128}
+                  className="drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]"
+                  priority
+                />
             </div>
-          )}
-        </CardContent>
+            <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300 animate-background-pan">
+              शुभ दिवाली
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {!wish ? (
+              <form onSubmit={handleCreateWish} className="space-y-4">
+                <Input
+                  type="text"
+                  placeholder="अपना नाम दर्ज करें"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="text-center text-lg h-12 bg-white/10 placeholder:text-gray-400 focus:ring-2 ring-offset-background"
+                  disabled={isLoading}
+                />
+                <Button type="submit" size="lg" className="w-full text-lg" disabled={isLoading}>
+                  {isLoading ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2" />
+                      शुभकामना बनाएँ
+                    </>
+                  )}
+                </Button>
+              </form>
+            ) : (
+              <div className="text-center space-y-6">
+                <blockquote className="text-2xl font-medium leading-relaxed bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-200 bg-clip-text text-transparent">
+                  " {wish} "
+                </blockquote>
+                <p className="text-lg text-yellow-400 font-semibold">- {name}</p>
+              </div>
+            )}
+          </CardContent>
 
-        {wish && (
-            <CardFooter className="flex-col gap-4">
-                <Button onClick={handleShare} className="w-full text-md bg-green-600 hover:bg-green-700">
-                    <Share2 className="mr-2" />
-                    WhatsApp पर साझा करें
-                </Button>
-                 <Button onClick={() => { setWish(''); setName(''); }} variant="outline" className="w-full">
-                    <Gift className="mr-2" />
-                    एक और शुभकामना बनाएँ
-                </Button>
-            </CardFooter>
-        )}
-      </Card>
+          {wish && (
+              <CardFooter className="flex-col gap-4">
+                  <Button onClick={handleShare} className="w-full text-md bg-green-600 hover:bg-green-700">
+                      <Share2 className="mr-2" />
+                      WhatsApp पर साझा करें
+                  </Button>
+                   <Button onClick={() => { setWish(''); setName(''); }} variant="outline" className="w-full">
+                      <Gift className="mr-2" />
+                      एक और शुभकामना बनाएँ
+                  </Button>
+              </CardFooter>
+          )}
+        </Card>
+      )}
       
       <footer className="absolute bottom-4 text-center text-sm text-white/50 z-10">
         AI के साथ बनाया गया। दिवाली की हार्दिक शुभकामनाएँ!
