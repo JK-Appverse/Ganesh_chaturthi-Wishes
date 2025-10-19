@@ -128,7 +128,7 @@ export default function Home() {
                   )}
                 </Button>
                 <a href="https://www.effectivegatecpm.com/e0tukiugmg?key=aa66468bdeeef3c2c0bf8a69a613d8ae" target="_blank" rel="noopener noreferrer">
-                  <Button type="button" variant="outline" size="lg" className="w-full text-lg mt-2">
+                  <Button type="button" size="lg" className="w-full text-lg mt-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-500 text-white hover:bg-gradient-to-br">
                      <Gift className="mr-2" />
                      आपके लिए एक तोहफा
                   </Button>
